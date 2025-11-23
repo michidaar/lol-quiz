@@ -1,0 +1,584 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LoL Quiz</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f4f4f4; }
+        #quiz-box { max-width: 600px; margin: auto; padding: 20px; background: white; border-radius: 10px; }
+        button { padding: 10px 20px; margin-top: 20px; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+<div id="quiz-box">
+    <h1>LoL Quiz</h1>
+
+    <div id="question-container"></div>
+
+    <button id="next-btn" class="hidden">Weiter</button>
+
+    <div id="result" class="hidden"></div>
+</div>
+
+<script>
+const quiz = [
+    {
+        "question": "League Frage 1: Beispieltext?",
+        "answers": [
+            "A1",
+            "B1",
+            "C1",
+            "D1"
+        ],
+        "correct": 0
+    },
+    {
+        "question": "League Frage 2: Beispieltext?",
+        "answers": [
+            "A2",
+            "B2",
+            "C2",
+            "D2"
+        ],
+        "correct": 0
+    },
+    {
+        "question": "League Frage 3: Beispieltext?",
+        "answers": [
+            "A3",
+            "B3",
+            "C3",
+            "D3"
+        ],
+        "correct": 0
+    },
+    {
+        "question": "League Frage 4: Beispieltext?",
+        "answers": [
+            "A4",
+            "B4",
+            "C4",
+            "D4"
+        ],
+        "correct": 0
+    },
+    {
+        "question": "League Frage 5: Beispieltext?",
+        "answers": [
+            "A5",
+            "B5",
+            "C5",
+            "D5"
+        ],
+        "correct": 0
+    },
+    {
+        "question": "League Frage 6: Beispieltext?",
+        "answers": [
+            "A6",
+            "B6",
+            "C6",
+            "D6"
+        ],
+        "correct": 0
+    },
+    {
+        "question": "League Frage 7: Beispieltext?",
+        "answers": [
+            "A7",
+            "B7",
+            "C7",
+            "D7"
+        ],
+        "correct": 0
+    },
+    {
+        "question": "League Frage 8: Beispieltext?",
+        "answers": [
+            "A8",
+            "B8",
+            "C8",
+            "D8"
+        ],
+        "correct": 0
+    },
+    {
+        "question": "League Frage 9: Beispieltext?",
+        "answers": [
+            "A9",
+            "B9",
+            "C9",
+            "D9"
+        ],
+        "correct": 0
+    },
+    {
+        "question": "League Frage 10: Beispieltext?",
+        "answers": [
+            "A10",
+            "B10",
+            "C10",
+            "D10"
+        ],
+        "correct": 0
+    },
+    {
+        "question": "League Frage 11: Beispieltext?",
+        "answers": [
+            "A11",
+            "B11",
+            "C11",
+            "D11"
+        ],
+        "correct": 0
+    },
+    {
+        "question": "League Frage 12: Beispieltext?",
+        "answers": [
+            "A12",
+            "B12",
+            "C12",
+            "D12"
+        ],
+        "correct": 0
+    },
+    {
+        "question": "League Frage 13: Beispieltext?",
+        "answers": [
+            "A13",
+            "B13",
+            "C13",
+            "D13"
+        ],
+        "correct": 0
+    },
+    {
+        "question": "League Frage 14: Beispieltext?",
+        "answers": [
+            "A14",
+            "B14",
+            "C14",
+            "D14"
+        ],
+        "correct": 0
+    },
+    {
+        "question": "League Frage 15: Beispieltext?",
+        "answers": [
+            "A15",
+            "B15",
+            "C15",
+            "D15"
+        ],
+        "correct": 0
+    },
+    {
+        "question": "League Frage 16: Beispieltext?",
+        "answers": [
+            "A16",
+            "B16",
+            "C16",
+            "D16"
+        ],
+        "correct": 0
+    },
+    {
+        "question": "League Frage 17: Beispieltext?",
+        "answers": [
+            "A17",
+            "B17",
+            "C17",
+            "D17"
+        ],
+        "correct": 0
+    },
+    {
+        "question": "League Frage 18: Beispieltext?",
+        "answers": [
+            "A18",
+            "B18",
+            "C18",
+            "D18"
+        ],
+        "correct": 0
+    },
+    {
+        "question": "League Frage 19: Beispieltext?",
+        "answers": [
+            "A19",
+            "B19",
+            "C19",
+            "D19"
+        ],
+        "correct": 0
+    },
+    {
+        "question": "League Frage 20: Beispieltext?",
+        "answers": [
+            "A20",
+            "B20",
+            "C20",
+            "D20"
+        ],
+        "correct": 0
+    },
+    {
+        "question": "League Frage 21: Beispieltext?",
+        "answers": [
+            "A21",
+            "B21",
+            "C21",
+            "D21"
+        ],
+        "correct": 0
+    },
+    {
+        "question": "League Frage 22: Beispieltext?",
+        "answers": [
+            "A22",
+            "B22",
+            "C22",
+            "D22"
+        ],
+        "correct": 0
+    },
+    {
+        "question": "League Frage 23: Beispieltext?",
+        "answers": [
+            "A23",
+            "B23",
+            "C23",
+            "D23"
+        ],
+        "correct": 0
+    },
+    {
+        "question": "League Frage 24: Beispieltext?",
+        "answers": [
+            "A24",
+            "B24",
+            "C24",
+            "D24"
+        ],
+        "correct": 0
+    },
+    {
+        "question": "League Frage 25: Beispieltext?",
+        "answers": [
+            "A25",
+            "B25",
+            "C25",
+            "D25"
+        ],
+        "correct": 0
+    },
+    {
+        "question": "League Frage 26: Beispieltext?",
+        "answers": [
+            "A26",
+            "B26",
+            "C26",
+            "D26"
+        ],
+        "correct": 0
+    },
+    {
+        "question": "League Frage 27: Beispieltext?",
+        "answers": [
+            "A27",
+            "B27",
+            "C27",
+            "D27"
+        ],
+        "correct": 0
+    },
+    {
+        "question": "League Frage 28: Beispieltext?",
+        "answers": [
+            "A28",
+            "B28",
+            "C28",
+            "D28"
+        ],
+        "correct": 0
+    },
+    {
+        "question": "League Frage 29: Beispieltext?",
+        "answers": [
+            "A29",
+            "B29",
+            "C29",
+            "D29"
+        ],
+        "correct": 0
+    },
+    {
+        "question": "League Frage 30: Beispieltext?",
+        "answers": [
+            "A30",
+            "B30",
+            "C30",
+            "D30"
+        ],
+        "correct": 0
+    },
+    {
+        "question": "League Frage 31: Beispieltext?",
+        "answers": [
+            "A31",
+            "B31",
+            "C31",
+            "D31"
+        ],
+        "correct": 0
+    },
+    {
+        "question": "League Frage 32: Beispieltext?",
+        "answers": [
+            "A32",
+            "B32",
+            "C32",
+            "D32"
+        ],
+        "correct": 0
+    },
+    {
+        "question": "League Frage 33: Beispieltext?",
+        "answers": [
+            "A33",
+            "B33",
+            "C33",
+            "D33"
+        ],
+        "correct": 0
+    },
+    {
+        "question": "League Frage 34: Beispieltext?",
+        "answers": [
+            "A34",
+            "B34",
+            "C34",
+            "D34"
+        ],
+        "correct": 0
+    },
+    {
+        "question": "League Frage 35: Beispieltext?",
+        "answers": [
+            "A35",
+            "B35",
+            "C35",
+            "D35"
+        ],
+        "correct": 0
+    },
+    {
+        "question": "League Frage 36: Beispieltext?",
+        "answers": [
+            "A36",
+            "B36",
+            "C36",
+            "D36"
+        ],
+        "correct": 0
+    },
+    {
+        "question": "League Frage 37: Beispieltext?",
+        "answers": [
+            "A37",
+            "B37",
+            "C37",
+            "D37"
+        ],
+        "correct": 0
+    },
+    {
+        "question": "League Frage 38: Beispieltext?",
+        "answers": [
+            "A38",
+            "B38",
+            "C38",
+            "D38"
+        ],
+        "correct": 0
+    },
+    {
+        "question": "League Frage 39: Beispieltext?",
+        "answers": [
+            "A39",
+            "B39",
+            "C39",
+            "D39"
+        ],
+        "correct": 0
+    },
+    {
+        "question": "League Frage 40: Beispieltext?",
+        "answers": [
+            "A40",
+            "B40",
+            "C40",
+            "D40"
+        ],
+        "correct": 0
+    },
+    {
+        "question": "League Frage 41: Beispieltext?",
+        "answers": [
+            "A41",
+            "B41",
+            "C41",
+            "D41"
+        ],
+        "correct": 0
+    },
+    {
+        "question": "League Frage 42: Beispieltext?",
+        "answers": [
+            "A42",
+            "B42",
+            "C42",
+            "D42"
+        ],
+        "correct": 0
+    },
+    {
+        "question": "League Frage 43: Beispieltext?",
+        "answers": [
+            "A43",
+            "B43",
+            "C43",
+            "D43"
+        ],
+        "correct": 0
+    },
+    {
+        "question": "League Frage 44: Beispieltext?",
+        "answers": [
+            "A44",
+            "B44",
+            "C44",
+            "D44"
+        ],
+        "correct": 0
+    },
+    {
+        "question": "League Frage 45: Beispieltext?",
+        "answers": [
+            "A45",
+            "B45",
+            "C45",
+            "D45"
+        ],
+        "correct": 0
+    },
+    {
+        "question": "League Frage 46: Beispieltext?",
+        "answers": [
+            "A46",
+            "B46",
+            "C46",
+            "D46"
+        ],
+        "correct": 0
+    },
+    {
+        "question": "League Frage 47: Beispieltext?",
+        "answers": [
+            "A47",
+            "B47",
+            "C47",
+            "D47"
+        ],
+        "correct": 0
+    },
+    {
+        "question": "League Frage 48: Beispieltext?",
+        "answers": [
+            "A48",
+            "B48",
+            "C48",
+            "D48"
+        ],
+        "correct": 0
+    },
+    {
+        "question": "League Frage 49: Beispieltext?",
+        "answers": [
+            "A49",
+            "B49",
+            "C49",
+            "D49"
+        ],
+        "correct": 0
+    },
+    {
+        "question": "League Frage 50: Beispieltext?",
+        "answers": [
+            "A50",
+            "B50",
+            "C50",
+            "D50"
+        ],
+        "correct": 0
+    }
+];
+
+let index = 0;
+let score = 0;
+
+const questionContainer = document.getElementById("question-container");
+const nextBtn = document.getElementById("next-btn");
+const result = document.getElementById("result");
+
+function loadQuestion() {
+    const q = quiz[index];
+    questionContainer.innerHTML = `
+        <h2>${q.question}</h2>
+        ${
+            q.answers.map((a, i) => `
+                <div>
+                    <input type="radio" name="answer" value="${i}">
+                    <label>${a}</label>
+                </div>
+            `).join("")
+        }
+    `;
+}
+
+nextBtn.onclick = () => {
+    const selected = document.querySelector("input[name='answer']:checked");
+    if (!selected) return;
+
+    if (parseInt(selected.value) === quiz[index].correct) score++;
+
+    index++;
+
+    if (index < quiz.length) {
+        loadQuestion();
+    } else {
+        showResult();
+    }
+};
+
+function showResult() {
+    questionContainer.classList.add("hidden");
+    nextBtn.classList.add("hidden");
+    result.classList.remove("hidden");
+
+    result.innerHTML = `
+        <h2>Ergebnis</h2>
+        <p>Du hast ${score} von ${quiz.length} Punkten!</p>
+    `;
+}
+
+loadQuestion();
+nextBtn.classList.remove("hidden");
+</script>
+
+</body>
+</html>
